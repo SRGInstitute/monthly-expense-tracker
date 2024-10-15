@@ -8,17 +8,24 @@
       var description = document.getElementById('description').value;
       var amount = document.getElementById('amount').value;
       var category = document.getElementById('category').value;
-      fetch('https://script.google.com/macros/s/AKfycbyJOWqDWEvO1uhr3GUm5soVTizAusFXyhcMusu_uZXatFVNkf1UzGcfljlRDjNyDH0b/exec?action=addExpense', {
+
+      const url = 'https://script.google.com/macros/s/AKfycbx-YhWdcSymmCVJC1vgKqXEDE_Xlnljzsom8Y0MHDefF4D5BEIWzF43z_UlnCrGEgW5/exec?action=addFormData'; // Replace with your API endpoint
+      const dataObject = { date: date,description: description,amount: amount,category: category }; // Replace with your data object
+      console.log("Date Object",dataObject)
+      const requestOptions = {
+        redirect: "follow",
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "text/plain;charset=utf-8",
+          // Add any other required headers here
         },
-        body: JSON.stringify({ date, description, amount, category })
-      })
-      .then(response => response.text())
-      .then(data => {
-        alert(data);
-      });
+        body: JSON.stringify(dataObject),
+      };
+
+      console.log("Registration data to be sent",dataObject)
+
+       const response =  fetch(url, requestOptions);
+
     }
   </script>
 </head>
